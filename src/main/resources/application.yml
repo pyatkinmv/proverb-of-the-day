@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  profiles:
+    active: dev
+
+---
+
+spring:
+  profiles: dev
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+server:
+  port: 3500
+
+---
+
+spring:
+  profiles: prod
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 3600
