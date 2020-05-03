@@ -2,20 +2,22 @@ package ru.pyatkinmv;
 
 
 import lombok.val;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.pyatkinmv.dao.ProverbRepository;
 import ru.pyatkinmv.model.Proverb;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
+
+@SpringBootTest(classes = Application.class)
+@EnableTransactionManagement
 public class ProverbRepositoryTest {
 
     @Autowired
@@ -32,16 +34,17 @@ public class ProverbRepositoryTest {
         val proverb = new Proverb("text", "descr");
 
         proverbRepository.save(proverb);
-
         val found = proverbRepository.findById(proverb.getId());
 
         assertTrue(found.isPresent());
-
         assertEquals(proverb, found.get());
     }
 
     @Test
+    @Transactional
     public void findFirstThatIsNotSuppliedTest() {
+        proverbRepository.deleteAll();
+
         val expected = new Proverb("three", "three");
         val proverbs = List.of(
                 new Proverb("one", "one"),
@@ -49,19 +52,15 @@ public class ProverbRepositoryTest {
                 expected
         );
 
-        proverbRepository.deleteAll();
-        proverbRepository.saveAll(proverbs);
+        val saved = proverbRepository.saveAll(proverbs);
 
-        proverbs.stream()
+        StreamSupport.stream(saved.spliterator(), false)
                 .filter(it -> !it.equals(expected))
                 .forEach(it -> it.setSupplied(true));
 
         val optionalProverb = proverbRepository.findFirstThatIsNotSupplied();
-
         assertTrue(optionalProverb.isPresent());
-
         val actual = optionalProverb.get();
-
         assertEquals(expected, actual);
     }
 }

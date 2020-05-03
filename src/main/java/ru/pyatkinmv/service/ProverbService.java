@@ -6,12 +6,15 @@ import org.springframework.stereotype.Service;
 import ru.pyatkinmv.dao.ProverbRepository;
 import ru.pyatkinmv.model.Proverb;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class ProverbService {
 
     private final ProverbRepository proverbRepository;
 
+    @Transactional
     public Proverb supply() {
         val optionalProverb = proverbRepository.findFirstThatIsNotSupplied();
 

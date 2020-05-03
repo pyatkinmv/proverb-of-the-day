@@ -14,6 +14,7 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
   profiles:
     active: dev
+  application.name: adverb-of-the-day
 
 ---
 
