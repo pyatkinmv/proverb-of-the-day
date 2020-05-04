@@ -1,6 +1,5 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
     username: sa
     password: ''
@@ -14,12 +13,14 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
   profiles:
     active: dev
-  application.name: adverb-of-the-day
+  application.name: proverb-of-the-day
 
 ---
 
 spring:
   profiles: dev
+  datasource:
+    url: jdbc:h2:mem:testdb
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -30,6 +31,9 @@ server:
 
 spring:
   profiles: prod
+  datasource:
+    url: jdbc:h2:file:~/h2/proverb-data
+#    initialization-mode: never
   jpa:
     hibernate:
       ddl-auto: update
