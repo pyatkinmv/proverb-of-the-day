@@ -1,0 +1,19 @@
+server:
+  port: 3700
+
+telegram:
+  bot:
+    token: ENC(qN/IcgHo/ILEoYUbZvaQTpCVlSS4FANBQA47akUvsKSQYx6a+Mxl5wA3QGuti8ndutQURiDnQ7M=)
+  channel:
+    name: ENC(5T/WRCyHZ5pcZKTPIJB1+TsNWTwE86minWpwAPZTCug=)
+
+services:
+  endpoints:
+    proverb-service: http://localhost:3500
+
+cron:
+  expression: "0 0 10 * * *"
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES

@@ -1,3 +1,6 @@
+server:
+  port: 3500
+
 spring:
   datasource:
     driverClassName: org.h2.Driver
@@ -24,8 +27,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-server:
-  port: 3500
 
 ---
 
@@ -37,5 +38,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-server:
-  port: 3600

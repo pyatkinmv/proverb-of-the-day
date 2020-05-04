@@ -10,8 +10,6 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 public class Proverb {
-    private static final String TO_STRING_FORMAT = "%s\n%s";
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,11 +26,6 @@ public class Proverb {
     public Proverb(String text, String description) {
         this.text = text;
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(TO_STRING_FORMAT, text, description);
     }
 }
 

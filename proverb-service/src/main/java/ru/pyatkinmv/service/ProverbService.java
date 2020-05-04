@@ -1,6 +1,7 @@
 package ru.pyatkinmv.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
 import ru.pyatkinmv.dao.ProverbRepository;
@@ -10,6 +11,7 @@ import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProverbService {
 
     private final ProverbRepository proverbRepository;
@@ -19,7 +21,10 @@ public class ProverbService {
         val optionalProverb = proverbRepository.findFirstThatIsNotSupplied();
 
         if (optionalProverb.isEmpty()) {
-            throw new IllegalStateException("All proverbs are already supplied or there are no proverbs at all");
+            val errorMessage = "All proverbs are already supplied or there are no proverbs at all";
+            log.error(errorMessage);
+
+            throw new IllegalStateException(errorMessage);
         }
 
         val proverb = optionalProverb.get();
