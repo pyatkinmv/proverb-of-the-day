@@ -5,7 +5,7 @@ telegram:
   bot:
     token: ENC(qN/IcgHo/ILEoYUbZvaQTpCVlSS4FANBQA47akUvsKSQYx6a+Mxl5wA3QGuti8ndutQURiDnQ7M=)
   channel:
-    name: ENC(5T/WRCyHZ5pcZKTPIJB1+TsNWTwE86minWpwAPZTCug=)
+    name: "@proverboftheday"
 
 services:
   endpoints:
