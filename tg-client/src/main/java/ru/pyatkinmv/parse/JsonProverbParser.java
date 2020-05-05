@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class JsonProverbParser {
-    private static final String TELEGRAM_PROVERB_FORMAT = "**%s**\n\n%s";
+    private static final String TELEGRAM_PROVERB_FORMAT = "<b>%s</b>\n\n%s";
 
     public static String parse(String jsonProverb) {
         val jsonObject = JsonParser.parseString(jsonProverb).getAsJsonObject();

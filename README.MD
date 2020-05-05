@@ -23,8 +23,8 @@ When starting with the prod profile, the file storage of the database is used. I
 # Application run
 
 At the root of the application, run the following commands:
-1) `mvn -pl proverb-service spring-boot: run -Dspring-boot.run.profiles = prod`
-2) `mvn -pl tg-client -Dspring-boot.run.arguments = "- jasypt.encryptor.password = [secret-key]" spring-boot: run`
+1) `mvn -pl proverb-service spring-boot:run -Dspring-boot.run.profiles=prod`
+2) `mvn -pl tg-client -Dspring-boot.run.arguments="--jasypt.encryptor.password=[secret-key]" spring-boot:run`
 
 The application uses an encrypted token for telegram bot. Therefore, instead of `[secret-key]`, you must specify the secret key.
 

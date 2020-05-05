@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 @Slf4j
 public class BotToChannelForwarder {
-    private static final String URI_FORMAT = "https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s";
+    private static final String URI_FORMAT = "https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s&parse_mode=html";
 
     private static final RestTemplate restTemplate = new RestTemplate();
     private static final String SUPPLY_PATH = "/supply";
@@ -59,6 +59,8 @@ public class BotToChannelForwarder {
 
         val strUri = String.format(URI_FORMAT, token, channelName, encoded);
         val uri = URI.create(strUri);
+
+        log.info("Sending the message [{}]", message);
 
         restTemplate.getForEntity(uri, String.class);
     }
